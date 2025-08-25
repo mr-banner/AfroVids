@@ -20,7 +20,7 @@ export function HeroSection() {
             <Button size="lg" className="text-base px-6 sm:px-8 w-full sm:w-auto" asChild>
               <a href="/auth/register">
                 <Sparkles className="w-4 h-4 mr-2" />
-                Try VideoAI AI
+                Try AfroVids AI
               </a>
             </Button>
             <Button variant="outline" size="lg" className="text-base px-6 sm:px-8 bg-transparent w-full sm:w-auto">

@@ -128,7 +128,7 @@ export function TemplatesGallery() {
     <section className="py-16 sm:py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center space-y-4 mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">VideoAI Video Creator</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">AfroVids Video Creator</h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4 sm:px-0">
             Create videos for YouTube shorts, Instagram reels, and TikTok that generate views.
           </p>

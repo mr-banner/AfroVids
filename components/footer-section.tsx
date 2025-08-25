@@ -11,9 +11,9 @@ export function Footer() {
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">V</span>
+                <span className="text-white font-bold text-lg">A</span>
               </div>
-              <span className="text-xl font-bold">VideoAI</span>
+              <span className="text-xl font-bold">AfroVids</span>
             </div>
             <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
               Create stunning videos with AI-powered tools. Transform your ideas into professional videos in minutes.

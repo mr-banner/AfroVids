@@ -17,9 +17,8 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: "VideoAI - Create Videos Without Limits",
+  title: "AfroVids - Create Videos Without Limits",
   description: "Professional video creation platform with AI-powered tools and templates",
-  generator: "v0.app",
 }
 
 export default function RootLayout({

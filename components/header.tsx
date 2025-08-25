@@ -15,7 +15,7 @@ export function Header() {
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <Play className="w-4 h-4 text-primary-foreground fill-current" />
             </div>
-            <span className="font-bold text-xl">VideoAI</span>
+            <span className="font-bold text-xl">AfroVids</span>
           </div>
 
           <nav className="hidden lg:flex items-center gap-6">

@@ -10,7 +10,7 @@ export function EditorHeader() {
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <Play className="w-4 h-4 text-primary-foreground fill-current" />
           </div>
-          <span className="font-bold">VideoAI</span>
+          <span className="font-bold">AfroVids</span>
         </div>
 
         <div className="flex items-center gap-2">
