@@ -125,34 +125,34 @@ const templates = [
 
 export function TemplatesGallery() {
   return (
-    <section className="py-20 px-4">
+    <section className="py-16 sm:py-20 px-4">
       <div className="container mx-auto max-w-7xl">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold">VideoAI Video Creator</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <div className="text-center space-y-4 mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">VideoAI Video Creator</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4 sm:px-0">
             Create videos for YouTube shorts, Instagram reels, and TikTok that generate views.
           </p>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap gap-2 justify-center mb-12">
-          {templateCategories.map((category) => (
-            <Button
-              key={category.name}
-              variant={category.active ? "default" : "outline"}
-              size="sm"
-              className="rounded-full"
-            >
-              {category.name}
-              <Badge variant="secondary" className="ml-2 text-xs">
-                {category.count}
-              </Badge>
-            </Button>
-          ))}
+        <div className="mb-8 sm:mb-12">
+          <div className="flex gap-2 justify-start sm:justify-center overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap">
+            {templateCategories.map((category) => (
+              <Button
+                key={category.name}
+                variant={category.active ? "default" : "outline"}
+                size="sm"
+                className="rounded-full flex-shrink-0 text-xs sm:text-sm"
+              >
+                {category.name}
+                <Badge variant="secondary" className="ml-2 text-xs">
+                  {category.count}
+                </Badge>
+              </Button>
+            ))}
+          </div>
         </div>
 
-        {/* Templates Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {templates.map((template) => (
             <Card
               key={template.id}
@@ -169,8 +169,8 @@ export function TemplatesGallery() {
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Button size="sm" className="rounded-full">
-                        <Play className="w-4 h-4 mr-2 fill-current" />
+                      <Button size="sm" className="rounded-full text-xs sm:text-sm">
+                        <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 fill-current" />
                         Preview
                       </Button>
                     </div>
@@ -178,13 +178,13 @@ export function TemplatesGallery() {
 
                   {/* Pro Badge */}
                   {template.isPro && (
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <Badge className="bg-primary text-primary-foreground text-xs">PRO</Badge>
                     </div>
                   )}
 
                   {/* Duration */}
-                  <div className="absolute bottom-3 right-3">
+                  <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3">
                     <Badge variant="secondary" className="text-xs bg-black/70 text-white border-0">
                       <Clock className="w-3 h-3 mr-1" />
                       {template.duration}
@@ -192,7 +192,7 @@ export function TemplatesGallery() {
                   </div>
                 </div>
 
-                <div className="p-4 space-y-3">
+                <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
                   <div className="space-y-1">
                     <h3 className="font-semibold text-sm line-clamp-1">{template.title}</h3>
                     <p className="text-xs text-muted-foreground">{template.category}</p>
@@ -203,7 +203,7 @@ export function TemplatesGallery() {
                       <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                       <span className="text-xs font-medium">{template.rating}</span>
                     </div>
-                    <Button size="sm" variant="outline" className="text-xs h-7 bg-transparent">
+                    <Button size="sm" variant="outline" className="text-xs h-6 sm:h-7 bg-transparent px-2 sm:px-3">
                       Use Template
                     </Button>
                   </div>
@@ -214,8 +214,8 @@ export function TemplatesGallery() {
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
+        <div className="text-center mt-8 sm:mt-12">
+          <Button variant="outline" size="lg" className="w-full sm:w-auto bg-transparent">
             Load More Templates
           </Button>
         </div>
