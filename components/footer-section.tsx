@@ -1,14 +1,14 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Facebook, Twitter, Instagram, Youtube, Linkedin } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Facebook, Twitter, Instagram, Youtube, Linkedin } from "lucide-react";
 
 export function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand Section */}
-          <div className="space-y-4 sm:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand Section - Full width on mobile, spans 2 cols on desktop */}
+          <div className="space-y-4 md:col-span-2 lg:col-span-1 order-1">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">A</span>
@@ -16,106 +16,167 @@ export function Footer() {
               <span className="text-xl font-bold">AfroVids</span>
             </div>
             <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
-              Create stunning videos with AI-powered tools. Transform your ideas into professional videos in minutes.
+              The first AI video platform created for the African & Caribbean
+              diaspora. Create authentic videos in minutes with real characters
+              and real voices.
             </p>
             <div className="flex space-x-2 sm:space-x-4">
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white p-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
                 <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white p-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
                 <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white p-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
                 <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white p-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
                 <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white p-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
                 <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
             </div>
           </div>
 
-          {/* Product Links */}
-          <div className="space-y-4">
+          {/* Product Links - Side by side with Company on mobile */}
+          <div className="space-y-4 order-2">
             <h3 className="font-semibold text-base sm:text-lg">Product</h3>
             <ul className="space-y-2 sm:space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Video Editor
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  AI Video Creator
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Templates
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  Cultural Templates
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  AI Features
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  Diverse Voices
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Stock Media
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  Character Library
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Brand Kit
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  Script Generator
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  API
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  API Access
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Company Links */}
-          <div className="space-y-4">
+          {/* Company Links - Side by side with Product on mobile */}
+          <div className="space-y-4 order-3">
             <h3 className="font-semibold text-base sm:text-lg">Company</h3>
             <ul className="space-y-2 sm:space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Careers
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  Our Mission
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Press
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  Community
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Help Center
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
+                  Support
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                >
                   Contact
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <div className="space-y-4 sm:col-span-2 lg:col-span-1">
-            <h3 className="font-semibold text-base sm:text-lg">Stay Updated</h3>
+          {/* Newsletter - Below Product/Company on mobile, spans 2 cols on desktop */}
+          <div className="space-y-4 md:col-span-2 lg:col-span-1 order-4">
+            <h3 className="font-semibold text-base sm:text-lg">
+              Stay Connected
+            </h3>
             <p className="text-gray-400 text-sm sm:text-base">
-              Get the latest updates, tips, and exclusive offers delivered to your inbox.
+              Join our community and get updates on new features, cultural
+              content, and representation in AI.
             </p>
             <div className="space-y-3">
               <Input
@@ -123,7 +184,9 @@ export function Footer() {
                 placeholder="Enter your email"
                 className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 text-sm sm:text-base"
               />
-              <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-sm sm:text-base">Subscribe</Button>
+              <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-sm sm:text-base">
+                Subscribe
+              </Button>
             </div>
           </div>
         </div>
@@ -132,16 +195,25 @@ export function Footer() {
         <div className="border-t border-gray-800 mt-8 sm:mt-12 pt-6 sm:pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
-              © 2024 VideoAI. All rights reserved.
+              © 2024 AfroVids. All rights reserved.
             </div>
             <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors text-center sm:text-left">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors text-center sm:text-left"
+              >
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors text-center sm:text-left">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors text-center sm:text-left"
+              >
                 Terms of Service
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors text-center sm:text-left">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors text-center sm:text-left"
+              >
                 Cookie Policy
               </a>
             </div>
@@ -149,5 +221,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

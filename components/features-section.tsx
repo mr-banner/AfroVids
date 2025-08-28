@@ -1,30 +1,30 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Wand2, Users, Zap, Globe } from "lucide-react"
+import { Users, MessageCircle, Zap, Globe } from "lucide-react"
 
 const features = [
   {
-    icon: Wand2,
-    title: "AI Video Generator",
-    description: "Transform text prompts into professional videos with our advanced AI technology.",
+    icon: Users,
+    title: "Authentic Representation",
+    description: "Afro-Caribbean characters you won't find elsewhere. Real faces that represent our community.",
     image: "/placeholder-vzk5h.png",
   },
   {
-    icon: Users,
-    title: "Social Media Videos",
-    description: "Create engaging content for YouTube, Instagram, TikTok and more with optimized formats.",
+    icon: MessageCircle,
+    title: "Cultural Voices",
+    description: "English, Patois, Creole & more. Authentic voices that speak your language and culture.",
     image: "/placeholder-o79tg.png",
   },
   {
     icon: Zap,
-    title: "Lightning Fast",
-    description: "Generate and export videos in minutes, not hours. Perfect for tight deadlines.",
+    title: "Fast & Easy",
+    description: "From script to video in minutes. No complex editing skills required.",
     image: "/fast-video-rendering.png",
   },
   {
     icon: Globe,
-    title: "Multi-Language",
-    description: "Create videos in 50+ languages with AI voiceovers and automatic subtitles.",
+    title: "Built for Our Stories",
+    description: "Centered on diaspora voices. Finally, a platform that understands our narrative.",
     image: "/multilingual-video-interface.png",
   },
 ]
@@ -34,9 +34,10 @@ export function FeaturesSection() {
     <section className="py-16 sm:py-20 px-4 bg-muted/30">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center space-y-4 mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Creativity at your command</h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
-            Powerful features that make video creation effortless and professional
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">The World's First Diaspora AI Video Platform</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4 sm:px-0">
+            Finally, a video platform that represents us. Create authentic content with characters, voices, and stories
+            that reflect the African & Caribbean diaspora.
           </p>
         </div>
 

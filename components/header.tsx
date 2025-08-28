@@ -8,7 +8,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+    <header className="bg-background/95 backdrop-blur py-2 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
@@ -19,32 +19,32 @@ export function Header() {
           </div>
 
           <nav className="hidden lg:flex items-center gap-6">
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="#" className="text-md font-medium hover:text-primary transition-colors">
               Templates
             </a>
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="#" className="text-md font-medium hover:text-primary transition-colors">
               Features
             </a>
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="#" className="text-md font-medium hover:text-primary transition-colors">
               Pricing
             </a>
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="#" className="text-md font-medium hover:text-primary transition-colors">
               Help
             </a>
           </nav>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <Button variant="ghost" size="sm" className="hidden sm:flex" asChild>
+          <Button variant="ghost" size="sm" className="hidden sm:flex text-md" asChild>
             <a href="/auth/login">Login</a>
           </Button>
-          <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
+          <Button variant="ghost" size="sm" className="hidden md:flex text-md" asChild>
             <a href="/dashboard">Dashboard</a>
           </Button>
-          <Button variant="outline" size="sm" className="hidden sm:flex bg-transparent" asChild>
+          <Button variant="outline" size="sm" className="hidden sm:flex bg-transparent text-md" asChild>
             <a href="/editor">Open Editor</a>
           </Button>
-          <Button size="sm" className="hidden sm:flex" asChild>
+          <Button size="sm" className="hidden sm:flex text-md" asChild>
             <a href="/auth/register">Sign up</a>
           </Button>
 
