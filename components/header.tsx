@@ -1,7 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Play, Menu, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
+import Image from "next/image"
 import { useState } from "react"
 
 export function Header() {
@@ -11,17 +12,14 @@ export function Header() {
     <header className="bg-background/95 backdrop-blur py-2 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Play className="w-4 h-4 text-primary-foreground fill-current" />
-            </div>
-            <span className="font-bold text-xl">AfroVids</span>
-          </div>
+          <Image 
+          src={"/logo.png"}
+          alt="AfroVids Logo"
+          width={100}
+          height={40}
+          />
 
           <nav className="hidden lg:flex items-center gap-6">
-            <a href="#" className="text-md font-medium hover:text-primary transition-colors">
-              Templates
-            </a>
             <a href="#" className="text-md font-medium hover:text-primary transition-colors">
               Features
             </a>

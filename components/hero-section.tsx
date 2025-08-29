@@ -1,67 +1,33 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Play, Sparkles } from "lucide-react";
 
-export function HeroSection() {
+export default function HeroSection() {
   return (
-    <section className="relative py-12 sm:py-16 md:py-20 px-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white">
-      <div className="container mx-auto max-w-6xl z-10">
-        <div className="text-center space-y-6 sm:space-y-8">
-          <div className="mb-8">
-            <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4">
-              AfroVids
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
-              AfroVids –{" "}
-              <span className="text-primary">Voices of the Diaspora</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              The first AI video platform created for the African & Caribbean
-              diaspora. Create authentic videos in minutes with real characters
-              and real voices.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
-            <Button
-              size="lg"
-              className="text-base px-6 sm:px-8 w-full sm:w-auto bg-green-600 hover:bg-green-700"
-              asChild
-            >
-              <a href="/auth/register">
-                <Sparkles className="w-4 h-4 mr-2" />
-                Start Creating
-              </a>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="text-base px-6 sm:px-8 bg-transparent border-white text-white hover:bg-white hover:text-black w-full sm:w-auto"
-            >
-              <Play className="w-4 h-4 mr-2" />
-              See How It Works
-            </Button>
-          </div>
-        </div>
-
-        <div className="mt-12 sm:mt-16 relative px-4 sm:px-0">
-          <div className="bg-card rounded-xl sm:rounded-2xl border shadow-2xl overflow-hidden">
-            <img
-              src="/video-editing-interface.png"
-              alt="VideoAI Editor Interface"
-              className="w-full h-auto"
-            />
-          </div>
-
-          <div className="hidden sm:block absolute -top-2 sm:-top-4 -left-2 sm:-left-4 bg-primary text-primary-foreground px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-lg">
-            AI-Powered
-          </div>
-          <div className="hidden sm:block absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 bg-accent text-accent-foreground px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-lg">
-            Export Ready
-          </div>
-        </div>
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-black via-[#0a0a0a] to-[#1a1a1a] px-4">
+      <div className="mb-6">
+        <Image
+          src="/logo.png"
+          alt="AfroVids Logo"
+          width={300}
+          height={120}
+          className="mx-auto"
+          priority
+        />
+      </div>
+      <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
+        AfroVids –{" "}
+        <span className="bg-gradient-to-r from-red-500 via-green-500 to-yellow-400 bg-clip-text text-transparent">
+          Voices of the Diaspora
+        </span>
+      </h1>
+      <p className="mt-4 max-w-2xl text-lg md:text-xl text-gray-300">
+        The first AI video platform that brings Afro-Caribbean stories to life —
+        automatically.
+      </p>
+      <div className="mt-8 flex gap-4 flex-wrap justify-center">
+        <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 text-lg rounded-xl shadow-lg">
+          Start Creating
+        </Button>
       </div>
     </section>
   );

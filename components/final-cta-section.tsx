@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from "lucide-react"
+import { ArrowRight} from "lucide-react"
+import Image from "next/image"
 
 export function FinalCtaSection() {
   return (
@@ -8,12 +9,13 @@ export function FinalCtaSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(239,68,68,0.1),transparent_50%)]" />
 
       <div className="container mx-auto px-4 text-center relative z-10">
-        <div className="mb-8">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl shadow-lg mb-6">
-            <Play className="w-12 h-12 text-white fill-white" />
-          </div>
-          <h3 className="text-2xl font-bold text-gray-900">AfroVids</h3>
-        </div>
+        <Image
+        src={"/logo.png"}
+        alt="AfroVids Logo"
+        width={250}
+        height={120}
+        className="mx-auto"
+        />
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 text-balance">
           Your Story Deserves to Be{" "}
           <span className="bg-gradient-to-r from-green-600 via-yellow-500 to-red-500 bg-clip-text text-transparent">
@@ -24,8 +26,6 @@ export function FinalCtaSection() {
         <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto text-balance">
           Join thousands of creators who are already telling their authentic stories with AfroVids
         </p>
-
-        {/* CTA Button */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             size="lg"
