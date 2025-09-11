@@ -47,8 +47,6 @@ export function LoginForm() {
   const handleGoogleResponse = async (response: any) => {
     setIsLoading(true);
     try {
-      console.log("Google credential:", response.credential);
-
       const res = await axios.post(`${backendURL}/api/auth/google`, {
         credential: response.credential,
       });
