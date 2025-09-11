@@ -1,15 +1,64 @@
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Play, Plus, Bell, Settings, LogOut, User, CreditCard } from "lucide-react"
+} from "@/components/ui/dropdown-menu";
+import {
+  Play,
+  Plus,
+  Bell,
+  Settings,
+  LogOut,
+  User,
+  CreditCard,
+} from "lucide-react";
+import Cookies from "js-cookie";
+import { toast } from "sonner";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+interface UserType {
+  name: string;
+  email: string;
+  avatar?: string;
+}
 
 export function DashboardHeader() {
+  const [user, setUser] = useState<UserType | null>(null);
+  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+  const handleLogOut = () => {
+    Cookies.remove("token");
+    toast.success("Successfully Loggedout");
+    window.location.href = "/";
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = Cookies.get("token");
+        if (!token) return;
+
+        const res = await axios.get(`${backendURL}/api/auth/getUser`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (res.data.success) {
+          setUser(res.data.user);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchUser();
+  }, []);
   return (
     <header className="h-16 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex items-center justify-between px-6 h-full">
@@ -36,16 +85,29 @@ export function DashboardHeader() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src="/user-avatar.png" alt="User" />
-                  <AvatarFallback>JD</AvatarFallback>
+                  <AvatarImage
+                    src={user?.avatar || ""}
+                    alt={user?.name || "User"}
+                  />
+                  <AvatarFallback>
+                    {user?.name
+                      ? user.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .toUpperCase()
+                      : "JD"}
+                  </AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <div className="flex items-center justify-start gap-2 p-2">
                 <div className="flex flex-col space-y-1 leading-none">
-                  <p className="font-medium">John Doe</p>
-                  <p className="w-[200px] truncate text-sm text-muted-foreground">john.doe@example.com</p>
+                  <p className="font-medium">{user?.name}</p>
+                  <p className="w-[200px] truncate text-sm text-muted-foreground">
+                    {user?.email}
+                  </p>
                 </div>
               </div>
               <DropdownMenuSeparator />
@@ -62,7 +124,7 @@ export function DashboardHeader() {
                 Settings
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogOut}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Log out
               </DropdownMenuItem>
@@ -71,5 +133,5 @@ export function DashboardHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }
