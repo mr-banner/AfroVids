@@ -15,9 +15,10 @@ import { toast } from "sonner";
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL; 
 
   useEffect(() => {
+  const initGoogle = () => {
     if ((window as any).google) {
       (window as any).google.accounts.id.initialize({
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
@@ -29,7 +30,19 @@ export function LoginForm() {
         { theme: "outline", size: "large", width: "full" }
       );
     }
-  }, []);
+  };
+  if (document.getElementById("google-script")) {
+    initGoogle();
+  } else {
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.id = "google-script";
+    script.async = true;
+    script.defer = true;
+    script.onload = initGoogle;
+    document.body.appendChild(script);
+  }
+}, []);
 
   const handleGoogleResponse = async (response: any) => {
     setIsLoading(true);
