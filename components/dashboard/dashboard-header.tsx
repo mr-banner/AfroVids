@@ -22,6 +22,7 @@ import Cookies from "js-cookie";
 import { toast } from "sonner";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface UserType {
   name: string;
@@ -67,7 +68,9 @@ export function DashboardHeader() {
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <Play className="w-4 h-4 text-primary-foreground fill-current" />
             </div>
-            <span className="font-bold text-xl">AfroVids</span>
+            <Link href={"/"}>
+              <span className="font-bold text-xl">AfroVids</span>
+            </Link>
           </div>
 
           <Button className="gap-2">
