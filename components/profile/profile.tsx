@@ -37,6 +37,13 @@ interface UserType {
   location?: string;
   bio?: string;
   updatedAt?: string;
+  subscription?: SubscriptionType;
+}
+interface SubscriptionType {
+  plan: "basic" | "pro" | "premium";
+  stripeSubscriptionId: string;
+  videoLimit: number;
+  status: "active" | "inactive";
 }
 
 interface FormData {
@@ -105,7 +112,7 @@ export default function ProfilePage() {
 
   const handleUpdate = async () => {
     try {
-    setIsLoading(true);
+      setIsLoading(true);
       if (!token) return;
       const response = await axios.put(
         `${backendURL}/api/auth/updateUser`,
@@ -123,9 +130,8 @@ export default function ProfilePage() {
       }
     } catch (error) {
       console.log(error);
-    }
-    finally{
-        setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -162,7 +168,10 @@ export default function ProfilePage() {
                 variant="secondary"
                 className="w-fit mx-auto md:mx-0 bg-green-100 text-green-800"
               >
-                Pro Creator
+                {user?.subscription?.plan
+                  ? user.subscription.plan.charAt(0).toUpperCase() +
+                    user.subscription.plan.slice(1) + " " + "Plan"
+                  : "Free"}
               </Badge>
             </div>
 
@@ -177,7 +186,8 @@ export default function ProfilePage() {
               </div>
               <div className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" />
-                <span>Joined on: 
+                <span>
+                  Joined on:
                   {user?.updatedAt
                     ? new Date(user.updatedAt).toLocaleDateString("en-GB", {
                         day: "2-digit",
@@ -301,9 +311,12 @@ export default function ProfilePage() {
                 className="w-full bg-green-600 hover:bg-green-700"
                 disabled={isLoading}
               >
-                
-                {isLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Edit3 className="w-4 h-4 mr-2" />}
-                {isLoading ? ("Updating Info...") : ("Update profile")}
+                {isLoading ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Edit3 className="w-4 h-4 mr-2" />
+                )}
+                {isLoading ? "Updating Info..." : "Update profile"}
               </Button>
             </CardContent>
           </Card>

@@ -17,6 +17,7 @@ import {
   LogOut,
   User,
   CreditCard,
+  Crown,
 } from "lucide-react";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
@@ -25,12 +26,19 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+interface SubscriptionType {
+  plan: "basic" | "pro" | "premium";
+  stripeSubscriptionId: string;
+  videoLimit: number;
+  status: "active" | "inactive";
+}
+
 interface UserType {
   name: string;
   email: string;
   avatar?: string;
+  subscription?: SubscriptionType;
 }
-
 export function DashboardHeader() {
   const [user, setUser] = useState<UserType | null>(null);
   const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -67,13 +75,13 @@ export function DashboardHeader() {
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <Link href={"/"}>
-            <Image
-              src={"/logo.png"}
-              alt="AfroVids Logo"
-              width={100}
-              height={40}
+              <Image
+                src={"/logo.png"}
+                alt="AfroVids Logo"
+                width={100}
+                height={40}
               />
-              </Link>
+            </Link>
           </div>
 
           <Button className="gap-2">
@@ -83,6 +91,19 @@ export function DashboardHeader() {
         </div>
 
         <div className="flex items-center gap-4">
+          {user?.subscription?.status === "active" ? (
+            <Button variant="default" size="sm" disabled>
+              <span>{user.subscription.plan.toUpperCase()} Plan</span>
+              <Crown className="w-4 h-4 ml-1" />
+            </Button>
+          ) : (
+            <Link href={"/subscribe"}>
+              <Button variant={"default"} size={"sm"}>
+                <span>Subscribe Now</span>
+                <Crown className="w-4 h-4 ml-1" />
+              </Button>
+            </Link>
+          )}
           <Button variant="ghost" size="sm">
             <Bell className="w-4 h-4" />
           </Button>

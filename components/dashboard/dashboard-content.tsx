@@ -53,7 +53,6 @@ const stats = [
 export function DashboardContent() {
   return (
     <div className="p-6 space-y-6">
-      {/* Welcome Section */}
       <div className="space-y-2">
         <h1 className="text-3xl font-bold">Welcome back, John!</h1>
         <p className="text-muted-foreground">Here's what's happening with your video projects today.</p>

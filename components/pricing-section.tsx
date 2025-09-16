@@ -1,11 +1,17 @@
+"use client"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Check, Star } from "lucide-react"
+import axios from "axios"
+import Cookies from "js-cookie"
 
 export function PricingSection() {
   const plans = [
     {
+      key: "basic",
       name: "Basic",
       price: "$15",
       period: "per month",
@@ -18,6 +24,7 @@ export function PricingSection() {
       popular: false,
     },
     {
+      key: "pro",
       name: "Pro",
       price: "$25",
       period: "per month",
@@ -31,6 +38,7 @@ export function PricingSection() {
       popular: true,
     },
     {
+      key: "premium",
       name: "Premium",
       price: "$40",
       period: "per month",
@@ -45,10 +53,39 @@ export function PricingSection() {
     },
   ]
 
+  const [selectedPlan, setSelectedPlan] = useState(1)
+
+  const handleSubscribe = async (planKey: string) => {
+    try {
+      const token = Cookies.get("token") // 👈 auth token
+      if (!token) {
+        alert("Please login first")
+        return
+      }
+
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subscribe/create-checkout-session`,
+        { plan: planKey },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      )
+
+      if (res.data.success && res.data.url) {
+        window.location.href = res.data.url 
+      }
+    } catch (error: any) {
+      console.error(error)
+      alert("Something went wrong. Please try again.")
+    }
+  }
+
   return (
     <section className="py-16 sm:py-20 md:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Choose Your Plan
@@ -57,14 +94,13 @@ export function PricingSection() {
             Simple, transparent pricing. Start creating videos today.
           </p>
         </div>
-
-        {/* Pricing Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <Card
-              key={index}
+              key={plan.key}
+              onClick={() => setSelectedPlan(index)}
               className={`relative w-full border-2 transition-all cursor-pointer duration-300 hover:shadow-xl ${
-                plan.popular
+                selectedPlan === index
                   ? "border-emerald-500 shadow-lg md:scale-105"
                   : "border-gray-200"
               }`}
@@ -105,10 +141,11 @@ export function PricingSection() {
                 </ul>
 
                 <Button
+                  onClick={() => handleSubscribe(plan.key)}
                   className={`w-full py-2.5 sm:py-3 text-base sm:text-lg ${
-                    plan.popular
+                    selectedPlan === index
                       ? "bg-emerald-500 hover:bg-emerald-600 text-white"
-                      : ""
+                      : "bg-gray-200 hover:bg-gray-300 text-gray-800"
                   }`}
                   size="lg"
                 >

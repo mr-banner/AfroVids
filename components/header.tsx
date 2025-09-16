@@ -61,12 +61,14 @@ export function Header() {
     <header className="bg-background/95 backdrop-blur py-2 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <Image
+          <Link href={"/"}>
+            <Image
             src={"/logo.png"}
             alt="AfroVids Logo"
             width={100}
             height={40}
           />
+          </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
             <a
@@ -76,7 +78,7 @@ export function Header() {
               Features
             </a>
             <a
-              href="#"
+              href="/subscribe"
               className="text-md font-medium hover:text-primary transition-colors"
             >
               Pricing
