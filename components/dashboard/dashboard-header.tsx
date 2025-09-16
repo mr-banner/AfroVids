@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface UserType {
   name: string;
@@ -33,6 +34,7 @@ interface UserType {
 export function DashboardHeader() {
   const [user, setUser] = useState<UserType | null>(null);
   const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const token = Cookies.get("token");
 
   const handleLogOut = () => {
     Cookies.remove("token");
@@ -43,7 +45,6 @@ export function DashboardHeader() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = Cookies.get("token");
         if (!token) return;
 
         const res = await axios.get(`${backendURL}/api/auth/getUser`, {
@@ -59,18 +60,20 @@ export function DashboardHeader() {
     };
 
     fetchUser();
-  }, []);
+  }, [token]);
   return (
-    <header className="h-16 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex items-center justify-between px-6 h-full">
+    <header className="h-21 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex items-center justify-between px-6 py-2 h-full">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Play className="w-4 h-4 text-primary-foreground fill-current" />
-            </div>
             <Link href={"/"}>
-              <span className="font-bold text-xl">AfroVids</span>
-            </Link>
+            <Image
+              src={"/logo.png"}
+              alt="AfroVids Logo"
+              width={100}
+              height={40}
+              />
+              </Link>
           </div>
 
           <Button className="gap-2">

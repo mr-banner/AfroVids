@@ -1,62 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Facebook, Twitter, Instagram, Youtube, Linkedin } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand Section - Full width on mobile, spans 2 cols on desktop */}
           <div className="space-y-4 md:col-span-2 lg:col-span-1 order-1">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
-              <span className="text-xl font-bold">AfroVids</span>
-            </div>
+              <Link href={"/"}>
+                <Image
+                  src={"/logo.png"}
+                  alt="AfroVids Logo"
+                  width={160}
+                  height={60}
+                  className="-mt-4 object-contain"
+                />
+              </Link>
             <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
               The first AI video platform created for the African & Caribbean
               diaspora. Create authentic videos in minutes with real characters
               and real voices.
             </p>
-            <div className="flex space-x-2 sm:space-x-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-400 hover:text-white p-2"
-              >
-                <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-400 hover:text-white p-2"
-              >
-                <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-400 hover:text-white p-2"
-              >
-                <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-400 hover:text-white p-2"
-              >
-                <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-400 hover:text-white p-2"
-              >
-                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
-              </Button>
-            </div>
+            
           </div>
 
           {/* Product Links - Side by side with Company on mobile */}
@@ -186,6 +154,43 @@ export function Footer() {
               />
               <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-sm sm:text-base">
                 Subscribe
+              </Button>
+            </div>
+            <div className="flex justify-center space-x-2 sm:space-x-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
+                <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
+                <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
+                <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
+                <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white p-2"
+              >
+                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
             </div>
           </div>

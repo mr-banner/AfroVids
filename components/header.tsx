@@ -29,6 +29,7 @@ export function Header() {
   const [user, setUser] = useState<UserType | null>(null);
   const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
   const isAuthenticated = Cookies.get("token");
+  const token = Cookies.get("token");
 
   const handleLogOut = () => {
     Cookies.remove("token");
@@ -39,7 +40,6 @@ export function Header() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = Cookies.get("token");
         if (!token) return;
 
         const res = await axios.get(`${backendURL}/api/auth/getUser`, {
@@ -55,7 +55,7 @@ export function Header() {
     };
 
     fetchUser();
-  }, []);
+  }, [token]);
 
   return (
     <header className="bg-background/95 backdrop-blur py-2 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">

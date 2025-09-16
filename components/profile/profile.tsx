@@ -19,7 +19,6 @@ import {
   MapPin,
   Calendar,
   Edit3,
-  Camera,
   Video,
   Clock,
   Award,
@@ -153,12 +152,6 @@ export default function ProfilePage() {
                     : "JD"}
                 </AvatarFallback>
               </Avatar>
-              <Button
-                size="sm"
-                className="absolute -bottom-2 -right-2 rounded-full w-10 h-10 p-0 bg-green-600 hover:bg-green-700"
-              >
-                <Camera className="w-4 h-4" />
-              </Button>
             </div>
           </div>
 
