@@ -16,6 +16,7 @@ import {
 import { Bell, Settings, LogOut, User, CreditCard } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
+import Link from "next/link";
 
 interface UserType {
   name: string;
@@ -90,22 +91,26 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hidden md:flex text-md"
-            asChild
-          >
-            <a href="/dashboard">Dashboard</a>
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="hidden sm:flex bg-transparent text-md"
-            asChild
-          >
-            <a href="/editor">Open Editor</a>
-          </Button>
+          {isAuthenticated && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hidden md:flex text-md"
+              asChild
+            >
+              <a href="/dashboard">Dashboard</a>
+            </Button>
+          )}
+          {isAuthenticated && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="hidden sm:flex bg-transparent text-md"
+              asChild
+            >
+              <a href="/editor">Open Editor</a>
+            </Button>
+          )}
           {!isAuthenticated ? (
             <Button size="sm" className="hidden sm:flex text-md" asChild>
               <a href="/auth/login">Sign in</a>
@@ -149,10 +154,12 @@ export function Header() {
                     </div>
                   </div>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
-                  </DropdownMenuItem>
+                  <Link href={"/profile"}>
+                    <DropdownMenuItem>
+                      <User className="mr-2 h-4 w-4" />
+                      Profile
+                    </DropdownMenuItem>
+                  </Link>
                   <DropdownMenuItem>
                     <CreditCard className="mr-2 h-4 w-4" />
                     Billing
@@ -222,15 +229,25 @@ export function Header() {
               </a>
             </nav>
             <div className="flex flex-col gap-3 pt-4 border-t border-border sm:hidden">
-              <Button variant="ghost" size="sm" asChild>
-                <a href="/auth/login">Login</a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a href="/dashboard">Dashboard</a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a href="/editor">Open Editor</a>
-              </Button>
+              {!isAuthenticated ? (
+                <Button variant="ghost" size="sm" asChild>
+                  <a href="/auth/login">Login</a>
+                </Button>
+              ) : (
+                <Button variant="ghost" size="sm" asChild>
+                  <a href="/auth/login">Logout</a>
+                </Button>
+              )}
+              {isAuthenticated && (
+                <Button variant="outline" size="sm" asChild>
+                  <a href="/dashboard">Dashboard</a>
+                </Button>
+              )}
+              {isAuthenticated && (
+                <Button variant="outline" size="sm" asChild>
+                  <a href="/editor">Open Editor</a>
+                </Button>
+              )}
             </div>
           </div>
         </div>
