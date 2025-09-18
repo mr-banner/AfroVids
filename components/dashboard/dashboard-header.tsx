@@ -84,10 +84,12 @@ export function DashboardHeader() {
             </Link>
           </div>
 
-          <Button className="gap-2">
+          <Link href={"/editor"}>
+            <Button className="gap-2">
             <Plus className="w-4 h-4" />
             Create Video
           </Button>
+          </Link>
         </div>
 
         <div className="flex items-center gap-4">
