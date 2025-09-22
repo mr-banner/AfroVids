@@ -11,7 +11,7 @@ import {
 } from "../constants/authConstants";
 
 interface Subscription {
-  plan: "basic" | "pro" | "premium";
+  plan: "basic" | "pro" | "premium" | "free";
   status: "active" | "inactive";
   videoLimit: number;
 }

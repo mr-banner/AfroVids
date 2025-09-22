@@ -31,7 +31,6 @@ import { fetchUser } from "@/store/actions/userActions";
 export function DashboardHeader() {
   const dispatch = useDispatch<AppDispatch>();
 
-  // Grab user from Redux store
   const { data: user, isAuthenticated } = useSelector(
     (state: RootState) => state.auth
   );
@@ -57,8 +56,8 @@ export function DashboardHeader() {
               <Image
                 src={"/logo.png"}
                 alt="AfroVids Logo"
-                width={100}
-                height={40}
+                width={90}
+                height={35}
               />
             </Link>
           </div>
@@ -72,20 +71,6 @@ export function DashboardHeader() {
         </div>
 
         <div className="flex items-center gap-4">
-          {user?.subscription?.status === "active" ? (
-            <Button variant="default" size="sm" disabled>
-              <span>{user?.subscription?.plan.toUpperCase()} Plan</span>
-              <Crown className="w-4 h-4 ml-1" />
-            </Button>
-          ) : (
-            <Link href={"/subscribe"}>
-              <Button variant="default" size="sm">
-                <span>Subscribe Now</span>
-                <Crown className="w-4 h-4 ml-1" />
-              </Button>
-            </Link>
-          )}
-
           <Button variant="ghost" size="sm">
             <Bell className="w-4 h-4" />
           </Button>

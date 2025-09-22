@@ -47,8 +47,8 @@ export function Header() {
             <Image
             src={"/logo.png"}
             alt="AfroVids Logo"
-            width={100}
-            height={40}
+            width={90}
+            height={35}
           />
           </Link>
 

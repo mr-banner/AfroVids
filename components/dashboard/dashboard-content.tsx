@@ -1,8 +1,11 @@
+"use client"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Play, Plus, MoreHorizontal, Eye, Download, Share2, TrendingUp, Clock, Users, Video } from "lucide-react"
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
 
 const recentVideos = [
   {
@@ -51,14 +54,15 @@ const stats = [
 ]
 
 export function DashboardContent() {
+  const {data} = useSelector(
+    (state:RootState) => state.auth
+  )
   return (
     <div className="p-6 space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold">Welcome back, John!</h1>
+        <h1 className="text-3xl font-bold">{`Welcome back, ${data?.name}`}</h1>
         <p className="text-muted-foreground">Here's what's happening with your video projects today.</p>
       </div>
-
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat) => (
           <Card key={stat.label}>
@@ -77,8 +81,6 @@ export function DashboardContent() {
           </Card>
         ))}
       </div>
-
-      {/* Quick Actions */}
       <Card>
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>

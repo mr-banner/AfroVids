@@ -25,9 +25,6 @@ import {
   Loader2,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import axios from "axios";
-import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { updateUser } from "@/store/actions/userActions";
@@ -102,7 +99,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-background">
       <DashboardHeader />
 
-      <div className="container mx-auto px-6 py-8 max-w-4xl">
+      <div className="container mx-auto px-6 py-8 max-w-6xl">
         <div className="flex flex-col md:flex-row gap-6 mb-8">
           <div className="flex flex-col items-center md:items-start">
             <div className="relative">
