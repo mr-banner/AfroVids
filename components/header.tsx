@@ -17,6 +17,8 @@ import { Bell, Settings, LogOut, User, CreditCard } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 interface UserType {
   name: string;
@@ -26,10 +28,9 @@ interface UserType {
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState<UserType | null>(null);
-  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
-  const isAuthenticated = Cookies.get("token");
-  const token = Cookies.get("token");
+  const { data: user, isAuthenticated } = useSelector(
+    (state: RootState) => state.auth
+  ); 
 
   const handleLogOut = () => {
     Cookies.remove("token");
@@ -37,25 +38,6 @@ export function Header() {
     window.location.reload();
   };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (!token) return;
-
-        const res = await axios.get(`${backendURL}/api/auth/getUser`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (res.data.success) {
-          setUser(res.data.user);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchUser();
-  }, [token]);
 
   return (
     <header className="bg-background/95 backdrop-blur py-2 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">

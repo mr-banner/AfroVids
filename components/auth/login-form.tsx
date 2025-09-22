@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 import {
   Card,
   CardContent,
@@ -11,59 +11,55 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Play } from "lucide-react";
-import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { loginWithGoogle } from "@/store/actions/userActions";
+import { AppDispatch, RootState } from "@/store/store";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
-  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL; 
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
+
+  const { loading, isAuthenticated, error } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   useEffect(() => {
-  const initGoogle = () => {
-    if ((window as any).google) {
-      (window as any).google.accounts.id.initialize({
-        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
-        callback: handleGoogleResponse,
-      });
+    const initGoogle = () => {
+      if ((window as any).google) {
+        (window as any).google.accounts.id.initialize({
+          client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+          callback: handleGoogleResponse,
+        });
 
-      (window as any).google.accounts.id.renderButton(
-        document.getElementById("google-btn"),
-        { theme: "outline", size: "large", width: "full" }
-      );
+        (window as any).google.accounts.id.renderButton(
+          document.getElementById("google-btn"),
+          { theme: "outline", size: "large", width: "full" }
+        );
+      }
+    };
+    if (document.getElementById("google-script")) {
+      initGoogle();
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.id = "google-script";
+      script.async = true;
+      script.defer = true;
+      script.onload = initGoogle;
+      document.body.appendChild(script);
     }
-  };
-  if (document.getElementById("google-script")) {
-    initGoogle();
-  } else {
-    const script = document.createElement("script");
-    script.src = "https://accounts.google.com/gsi/client";
-    script.id = "google-script";
-    script.async = true;
-    script.defer = true;
-    script.onload = initGoogle;
-    document.body.appendChild(script);
-  }
-}, []);
+  }, []);
 
   const handleGoogleResponse = async (response: any) => {
-    setIsLoading(true);
-    try {
-      const res = await axios.post(`${backendURL}/api/auth/google`, {
-        credential: response.credential,
-      });
-
-      const data = res.data;
-
-      if (data.success) {
-        Cookies.set("token", data.token, { expires: 7, sameSite: "Lax" });
-        window.location.href = "/dashboard";
-        toast.success("Signed in successfully")
-      }
-    } catch (error) {
-      console.error("Google login error:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    await dispatch(loginWithGoogle(response.credential));
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className="space-y-6">
@@ -83,7 +79,7 @@ export function LoginForm() {
         </CardHeader>
         <CardContent className="pt-6">
           <div id="google-btn" className="w-full flex justify-center"></div>
-          {isLoading && <p className="text-center mt-2">Signing in...</p>}
+          {loading && <p className="text-center mt-2">Signing in...</p>}
         </CardContent>
       </Card>
 

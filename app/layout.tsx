@@ -4,6 +4,7 @@ import { Geist } from "next/font/google";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { Providers } from "@/store/providers";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -34,10 +35,12 @@ export default function RootLayout({
       className={`${geist.variable} ${manrope.variable} antialiased`}
     >
       <script src="https://accounts.google.com/gsi/client" async defer></script>
+      <Providers>
       <body className="font-sans">
         <Toaster position={"top-right" as const} richColors/>
         <main>{children}</main>
       </body>
+      </Providers>
     </html>
   );
 }

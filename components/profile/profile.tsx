@@ -28,6 +28,9 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import { updateUser } from "@/store/actions/userActions";
 
 interface UserType {
   name: string;
@@ -55,8 +58,10 @@ interface FormData {
 }
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<UserType | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>()
+  const {data:user, loading,} = useSelector(
+    (state: RootState) => state.auth
+  )
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -66,27 +71,6 @@ export default function ProfilePage() {
     bio: "",
   });
 
-  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
-  const token = Cookies.get("token");
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (!token) return;
-        const res = await axios.get(`${backendURL}/api/auth/getUser`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (res.data.success) {
-          setUser(res.data.user);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchUser();
-  }, []);
 
   useEffect(() => {
     if (user) {
@@ -111,28 +95,7 @@ export default function ProfilePage() {
   };
 
   const handleUpdate = async () => {
-    try {
-      setIsLoading(true);
-      if (!token) return;
-      const response = await axios.put(
-        `${backendURL}/api/auth/updateUser`,
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      if (response.data.success) {
-        toast.success(
-          response?.data?.message || "User profile updated successfully"
-        );
-        setUser(response.data.user);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    await dispatch(updateUser(formData));
   };
 
   return (
@@ -309,14 +272,14 @@ export default function ProfilePage() {
               <Button
                 onClick={handleUpdate}
                 className="w-full bg-green-600 hover:bg-green-700"
-                disabled={isLoading}
+                disabled={loading}
               >
-                {isLoading ? (
+                {loading ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 ) : (
                   <Edit3 className="w-4 h-4 mr-2" />
                 )}
-                {isLoading ? "Updating Info..." : "Update profile"}
+                {loading ? "Updating Info..." : "Update profile"}
               </Button>
             </CardContent>
           </Card>

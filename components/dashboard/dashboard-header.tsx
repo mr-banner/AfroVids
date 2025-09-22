@@ -10,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  Play,
   Plus,
   Bell,
   Settings,
@@ -21,54 +20,34 @@ import {
 } from "lucide-react";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import { fetchUser } from "@/store/actions/userActions";
 
-interface SubscriptionType {
-  plan: "basic" | "pro" | "premium";
-  stripeSubscriptionId: string;
-  videoLimit: number;
-  status: "active" | "inactive";
-}
 
-interface UserType {
-  name: string;
-  email: string;
-  avatar?: string;
-  subscription?: SubscriptionType;
-}
 export function DashboardHeader() {
-  const [user, setUser] = useState<UserType | null>(null);
-  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
-  const token = Cookies.get("token");
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Grab user from Redux store
+  const { data: user, isAuthenticated } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   const handleLogOut = () => {
     Cookies.remove("token");
-    toast.success("Successfully Loggedout");
+    toast.success("Successfully Logged out");
     window.location.href = "/";
   };
-
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (!token) return;
+    const token = Cookies.get("token");
+    if (token && !isAuthenticated) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch, isAuthenticated]);
 
-        const res = await axios.get(`${backendURL}/api/auth/getUser`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (res.data.success) {
-          setUser(res.data.user);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchUser();
-  }, [token]);
   return (
     <header className="h-21 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex items-center justify-between px-6 py-2 h-full">
@@ -86,26 +65,27 @@ export function DashboardHeader() {
 
           <Link href={"/editor"}>
             <Button className="gap-2">
-            <Plus className="w-4 h-4" />
-            Create Video
-          </Button>
+              <Plus className="w-4 h-4" />
+              Create Video
+            </Button>
           </Link>
         </div>
 
         <div className="flex items-center gap-4">
           {user?.subscription?.status === "active" ? (
             <Button variant="default" size="sm" disabled>
-              <span>{user.subscription.plan.toUpperCase()} Plan</span>
+              <span>{user?.subscription?.plan.toUpperCase()} Plan</span>
               <Crown className="w-4 h-4 ml-1" />
             </Button>
           ) : (
             <Link href={"/subscribe"}>
-              <Button variant={"default"} size={"sm"}>
+              <Button variant="default" size="sm">
                 <span>Subscribe Now</span>
                 <Crown className="w-4 h-4 ml-1" />
               </Button>
             </Link>
           )}
+
           <Button variant="ghost" size="sm">
             <Bell className="w-4 h-4" />
           </Button>
@@ -114,10 +94,7 @@ export function DashboardHeader() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage
-                    src={user?.avatar || ""}
-                    alt={user?.name || "User"}
-                  />
+                  <AvatarImage src={user?.avatar || ""} alt={user?.name || "User"} />
                   <AvatarFallback>
                     {user?.name
                       ? user.name
