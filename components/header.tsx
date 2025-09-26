@@ -17,8 +17,9 @@ import { Bell, Settings, LogOut, User, CreditCard } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 import Link from "next/link";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import { fetchUser } from "@/store/actions/userActions";
 
 interface UserType {
   name: string;
@@ -30,7 +31,9 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: user, isAuthenticated } = useSelector(
     (state: RootState) => state.auth
-  ); 
+  );
+  const dispatch = useDispatch<AppDispatch>();
+  
 
   const handleLogOut = () => {
     Cookies.remove("token");
@@ -38,6 +41,12 @@ export function Header() {
     window.location.reload();
   };
 
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token && !isAuthenticated) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch, isAuthenticated]);
 
   return (
     <header className="bg-background/95 backdrop-blur py-2 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
